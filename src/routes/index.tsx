@@ -11,6 +11,7 @@ import {
   Check,
   Sparkles,
   Waves,
+  ChevronsUp,
 } from "lucide-react";
 import {
   sendFatigaData,
@@ -29,29 +30,37 @@ export const Route = createFileRoute("/")({
   component: WatchApp,
 });
 
-type ViewId = "splash" | "dashboard" | "slider" | "metrics" | "alert";
+type ViewId = "splash" | "dashboard" | "slider" | "metrics" | "alert" | "likert";
 
-const VIEWS: ViewId[] = ["splash", "dashboard", "slider", "metrics", "alert"];
+// Solo estas vistas tendrán los puntitos de navegación inferiores
+const NAV_VIEWS: ViewId[] = ["dashboard", "slider", "metrics"];
 
 function WatchApp() {
   const [view, setView] = useState<ViewId>("splash");
 
+  // 1. Quitar la pantalla de carga inicial
   useEffect(() => {
     const t = setTimeout(() => setView("dashboard"), 2200);
     return () => clearTimeout(t);
   }, []);
 
-  // Register Azure sync on mount (flushes pending offline queue when online)
+  // 2. Registrar sincronización con Azure
   useEffect(() => {
     const off = registerConnectivitySync();
     return off;
   }, []);
 
-  // Simulate IA alert appearance after some time on dashboard
+  // 3. Simular Alerta de IA (a los 12 seg) y Likert automático (a los 25 seg)
   useEffect(() => {
     if (view !== "dashboard") return;
-    const t = setTimeout(() => setView("alert"), 12000);
-    return () => clearTimeout(t);
+    
+    const alertTimer = setTimeout(() => setView("alert"), 12000); // Sale a los 12,000 milisegundos (12s)
+    const likertTimer = setTimeout(() => setView("likert"), 25000); // Sale a los 25,000 milisegundos (25s)
+    
+    return () => {
+      clearTimeout(alertTimer);
+      clearTimeout(likertTimer);
+    };
   }, [view]);
 
   const go = (next: ViewId) => setView(next);
@@ -71,9 +80,9 @@ function WatchApp() {
           <WatchScreen view={view} onNavigate={go} />
         </div>
 
-        {/* Dots nav under watch */}
+        {/* Dots nav under watch (Solo para vistas principales) */}
         <div className="mt-6 flex items-center justify-center gap-2">
-          {VIEWS.map((v) => (
+          {NAV_VIEWS.map((v) => (
             <button
               key={v}
               onClick={() => go(v)}
@@ -98,19 +107,22 @@ function WatchScreen({
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to active section
+  // Scroll to active section (solo para las 3 vistas principales)
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    const idx = ["dashboard", "slider", "metrics"].indexOf(view);
+    const idx = NAV_VIEWS.indexOf(view);
     if (idx >= 0) {
       el.scrollTo({ top: idx * 320, behavior: "smooth" });
     }
   }, [view]);
 
+  // Vistas a pantalla completa (Alertas y Cargas)
   if (view === "splash") return <Splash />;
   if (view === "alert") return <AlertView onDismiss={() => onNavigate("dashboard")} />;
+  if (view === "likert") return <LikertPullView onSaved={() => onNavigate("dashboard")} />;
 
+  // Vistas navegables por Scroll
   return (
     <div
       ref={scrollRef}
@@ -118,15 +130,17 @@ function WatchScreen({
       onScroll={(e) => {
         const top = (e.target as HTMLDivElement).scrollTop;
         const idx = Math.round(top / 320);
-        const next = (["dashboard", "slider", "metrics"] as ViewId[])[idx];
+        const next = NAV_VIEWS[idx];
         if (next && next !== view) {
-          // Update without re-triggering scroll
-          // (we let user free-scroll)
+          // El usuario hace scroll libre
         }
       }}
     >
       <section className="snap-start h-[320px] w-[320px]">
-        <Dashboard onAlert={() => onNavigate("alert")} />
+        <Dashboard 
+          onAlert={() => onNavigate("alert")} 
+          onLikert={() => onNavigate("likert")} 
+        />
       </section>
       <section className="snap-start h-[320px] w-[320px]">
         <SliderView />
@@ -160,7 +174,7 @@ function Splash() {
 }
 
 /* ---------------- Dashboard ---------------- */
-function Dashboard({ onAlert }: { onAlert: () => void }) {
+function Dashboard({ onAlert, onLikert }: { onAlert: () => void; onLikert: () => void }) {
   const [time, setTime] = useState(() => formatTime(new Date()));
   useEffect(() => {
     const i = setInterval(() => setTime(formatTime(new Date())), 1000 * 30);
@@ -214,12 +228,20 @@ function Dashboard({ onAlert }: { onAlert: () => void }) {
         </div>
       </div>
 
-      <button
-        onClick={onAlert}
-        className="text-[11px] text-white/40 hover:text-white/70 transition-colors"
-      >
-        Núcleo Vital · Óptimo
-      </button>
+      <div className="flex flex-col items-center gap-2">
+        <button
+          onClick={onLikert}
+          className="text-[12px] font-medium text-emerald-400 bg-emerald-400/10 px-4 py-1.5 rounded-full hover:bg-emerald-400/20 transition-colors"
+        >
+          Ultima Pregunta
+        </button>
+        <button
+          onClick={onAlert}
+          className="text-[11px] text-white/40 hover:text-white/70 transition-colors"
+        >
+          Núcleo Vital · Óptimo
+        </button>
+      </div>
     </div>
   );
 }
@@ -244,13 +266,11 @@ function SliderView() {
       <p className="text-white text-sm font-medium tracking-tight">¿Nivel de fatiga?</p>
 
       <div className="flex items-center gap-5">
-        {/* Labels column */}
         <div className="flex flex-col items-center justify-between h-[170px] py-1">
           <Flame className="text-red-400" size={18} />
           <Feather className="text-emerald-400" size={18} />
         </div>
 
-        {/* Vertical slider */}
         <div className="relative h-[170px] w-10 rounded-full bg-white/5 border border-white/10 overflow-hidden">
           <div
             className={`absolute bottom-0 left-0 right-0 ${trackColor} transition-all`}
@@ -271,7 +291,6 @@ function SliderView() {
           />
         </div>
 
-        {/* Value */}
         <div className={`text-3xl font-semibold tabular-nums ${color} w-14 text-center`}>
           {value}
         </div>
@@ -330,7 +349,6 @@ function Metrics() {
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const items = [
@@ -399,7 +417,6 @@ function Metrics() {
 function AlertView({ onDismiss }: { onDismiss: () => void }) {
   return (
     <div className="relative h-full w-full">
-      {/* Glowing border */}
       <div className="absolute inset-0 rounded-full ring-4 ring-sky-400/60 shadow-[inset_0_0_40px_rgba(56,189,248,0.35)] animate-pulse pointer-events-none" />
 
       <div className="h-full w-full flex flex-col items-center justify-between py-8 px-6 text-center">
@@ -432,6 +449,193 @@ function AlertView({ onDismiss }: { onDismiss: () => void }) {
           >
             Ignorar
           </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- Likert Pull View ---------------- */
+export function LikertPullView({ 
+  question = "¿Qué tan satisfecho te sientes hoy?", 
+  onSaved 
+}: { 
+  question?: string; 
+  onSaved?: () => void; 
+}) {
+  const [isDragging, setIsDragging] = useState(false);
+  const [pointer, setPointer] = useState({ x: 160, y: 160 });
+  const [hoverVal, setHoverVal] = useState<number | null>(null);
+  const [confirmedVal, setConfirmedVal] = useState<number | null>(null);
+
+  // Temporizador: Si pasan 60s sin interacción, se cierra automáticamente
+  useEffect(() => {
+    if (confirmedVal !== null || isDragging) return;
+    const timer = setTimeout(() => {
+      if (onSaved) onSaved(); 
+    }, 60000);
+    return () => clearTimeout(timer);
+  }, [isDragging, confirmedVal, onSaved]);
+
+  const segments = [
+    { val: 1, color: "stroke-red-500", text: "text-red-500", rot: -65 },
+    { val: 2, color: "stroke-orange-500", text: "text-orange-500", rot: -32.5 },
+    { val: 3, color: "stroke-yellow-400", text: "text-yellow-400", rot: 0 },
+    { val: 4, color: "stroke-lime-400", text: "text-lime-400", rot: 32.5 },
+    { val: 5, color: "stroke-green-500", text: "text-green-500", rot: 65 },
+  ];
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (confirmedVal) return;
+    setIsDragging(true);
+    updatePointer(e);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDragging || confirmedVal) return;
+    updatePointer(e);
+  };
+
+  const updatePointer = (e: React.PointerEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setPointer({ x, y });
+
+    const originX = 160;
+    const originY = 180;
+    const dx = x - originX;
+    const dy = y - originY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance > 50 && y < 160) {
+      const cx = x - 160;
+      const cy = y - 160;
+      const angle = (Math.atan2(cy, cx) * 180) / Math.PI;
+
+      if (angle > -180 && angle < -140) setHoverVal(1);
+      else if (angle >= -140 && angle < -110) setHoverVal(2);
+      else if (angle >= -110 && angle < -70) setHoverVal(3);
+      else if (angle >= -70 && angle < -40) setHoverVal(4);
+      else if (angle >= -40 && angle <= 0) setHoverVal(5);
+    } else {
+      setHoverVal(null);
+    }
+  };
+
+  const handlePointerUp = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    
+    if (hoverVal !== null) {
+      setConfirmedVal(hoverVal);
+      setTimeout(() => {
+        if (onSaved) onSaved();
+      }, 2000);
+    } else {
+      setPointer({ x: 160, y: 160 });
+    }
+  };
+
+  if (confirmedVal) {
+    return (
+      <div className="h-full w-full flex flex-col items-center justify-center text-center bg-black px-6">
+        <div className="h-16 w-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-4 transition-transform scale-110">
+          <Check className="text-emerald-400" size={36} strokeWidth={3} />
+        </div>
+        <p className="text-white text-xl font-medium tracking-tight">¡Gracias!</p>
+        <p className="text-white/60 text-sm mt-1 leading-snug">Tu respuesta ha sido<br/>registrada.</p>
+      </div>
+    );
+  }
+
+  const radius = 130;
+  const circ = 2 * Math.PI * radius; 
+
+  return (
+    <div
+      className="relative h-full w-full bg-black overflow-hidden touch-none select-none z-50"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerUp}
+    >
+      <svg className="absolute inset-0 pointer-events-none" viewBox="0 0 320 320">
+        {segments.map((seg) => {
+          const isHovered = hoverVal === seg.val;
+          return (
+            <g key={seg.val} transform={`rotate(${seg.rot - 90}, 160, 160)`}>
+              <circle
+                cx="160"
+                cy="160"
+                r={radius}
+                fill="none"
+                strokeWidth={isHovered ? "10" : "5"}
+                className={`${seg.color} transition-all duration-300 ${
+                  !isDragging || isHovered ? "opacity-100" : "opacity-30"
+                }`}
+                strokeDasharray={`40 ${circ}`}
+                strokeDashoffset="-20"
+                strokeLinecap="round"
+              />
+            </g>
+          );
+        })}
+
+        {isDragging && (
+          <line
+            x1="160"
+            y1="160"
+            x2={pointer.x}
+            y2={pointer.y}
+            stroke="white"
+            strokeWidth="2"
+            strokeDasharray="4 4"
+            className="opacity-60"
+          />
+        )}
+        
+        {isDragging && (
+          <circle 
+            cx={pointer.x} cy={pointer.y} r="8" fill="white" 
+            className="shadow-[0_0_15px_rgba(255,255,255,0.8)]" 
+          />
+        )}
+      </svg>
+
+      {segments.map((seg) => {
+        const rad = (seg.rot - 90) * (Math.PI / 180);
+        const x = 160 + Math.cos(rad) * 100;
+        const y = 160 + Math.sin(rad) * 100;
+        const isHovered = hoverVal === seg.val;
+        
+        return (
+          <div
+            key={`text-${seg.val}`}
+            className={`absolute w-6 h-6 -ml-3 -mt-3 text-center font-bold text-[15px] transition-all duration-300 pointer-events-none ${seg.text} ${
+              isHovered ? "scale-150 drop-shadow-[0_0_10px_currentColor]" : (!isDragging ? "opacity-90" : "opacity-20")
+            }`}
+            style={{ left: x, top: y }}
+          >
+            {seg.val}
+          </div>
+        );
+      })}
+
+      <div
+        className={`absolute inset-x-8 top-20 bottom-20 transition-all duration-500 flex flex-col items-center justify-center text-center pointer-events-none rounded-full ${
+          isDragging ? "opacity-0 scale-75 blur-md" : "opacity-100 scale-100"
+        }`}
+        style={{
+          background: "radial-gradient(circle, rgba(20,20,20,0.8) 0%, rgba(0,0,0,0) 70%)"
+        }}
+      >
+        <p className="text-white font-medium text-[15px] leading-tight px-2">
+          {question}
+        </p>
+        <div className="mt-4 flex flex-col items-center gap-0.5 opacity-50">
+          <p className="text-[10px] uppercase tracking-wider text-white">Jala el centro</p>
+          <ChevronsUp size={18} className="text-white animate-bounce mt-1" />
         </div>
       </div>
     </div>
