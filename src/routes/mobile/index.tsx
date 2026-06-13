@@ -329,7 +329,7 @@ function RegisterScreen({
 
 /* ─────────────── Onboarding ─────────────── */
 
-const TOTAL_STEPS = 3;
+const TOTAL_STEPS = 5;
 
 type OnboardingProfile = {
   nombre: string;
@@ -337,9 +337,29 @@ type OnboardingProfile = {
   profesion: string;
   instituto: string;
   genero: string;
+  horario: string;
+  notificaciones: string;
 };
 
 const GENERO_OPTIONS = ["Masculino", "Femenino", "No binario", "Prefiero no decir"];
+
+const HORARIO_OPTIONS = [
+  "Turno Mañana (6:00 – 14:00)",
+  "Turno Tarde (14:00 – 22:00)",
+  "Turno Noche (22:00 – 6:00)",
+  "Jornada Regular (8:00 – 17:00)",
+  "Turno Rotativo (variable)",
+  "Guardias de 12 horas",
+  "Guardias de 24 horas o más",
+];
+
+const NOTIFICACION_OPTIONS = [
+  "Al iniciar mi turno",
+  "En mis momentos de descanso",
+  "Al finalizar mi turno",
+  "Solo cuando mis métricas estén en alerta",
+  "Cada 2 horas durante el turno",
+];
 
 function OnboardingScreen({ uid, onDone }: { uid: string; onDone: () => void }) {
   const [step, setStep] = useState(0);
@@ -349,6 +369,8 @@ function OnboardingScreen({ uid, onDone }: { uid: string; onDone: () => void }) 
     profesion: "",
     instituto: "",
     genero: "",
+    horario: "",
+    notificaciones: "",
   });
 
   const isLast = step === TOTAL_STEPS - 1;
@@ -361,7 +383,11 @@ function OnboardingScreen({ uid, onDone }: { uid: string; onDone: () => void }) 
       ? profile.nombre.trim() !== "" && profile.edad.trim() !== "" && Number(profile.edad) > 0
       : step === 1
         ? profile.profesion.trim() !== "" && profile.instituto.trim() !== ""
-        : profile.genero !== "";
+        : step === 2
+          ? profile.genero !== ""
+          : step === 3
+            ? profile.horario !== ""
+            : profile.notificaciones !== "";
 
   const advance = () => {
     if (!stepValid) return;
@@ -495,6 +521,58 @@ function OnboardingScreen({ uid, onDone }: { uid: string; onDone: () => void }) 
                   >
                     <span>{option}</span>
                     {profile.genero === option && (
+                      <Check size={16} className="text-emerald-400 shrink-0" strokeWidth={3} />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          {step === 3 && (
+            <>
+              <p className="text-white font-semibold text-lg leading-snug">
+                ¿Cuál es tu horario laboral habitual?
+              </p>
+              <div className="flex flex-col gap-2.5">
+                {HORARIO_OPTIONS.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => set("horario", option)}
+                    className={`w-full text-left px-4 py-3.5 rounded-2xl border text-sm font-medium transition active:scale-[0.98] flex items-center justify-between gap-3 ${
+                      profile.horario === option
+                        ? "bg-emerald-500/15 border-emerald-400/60 text-emerald-300"
+                        : "bg-neutral-800 border-white/10 text-white/70 hover:border-white/20"
+                    }`}
+                  >
+                    <span>{option}</span>
+                    {profile.horario === option && (
+                      <Check size={16} className="text-emerald-400 shrink-0" strokeWidth={3} />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          {step === 4 && (
+            <>
+              <p className="text-white font-semibold text-lg leading-snug">
+                ¿En qué momento quieres recibir notificaciones?
+              </p>
+              <div className="flex flex-col gap-2.5">
+                {NOTIFICACION_OPTIONS.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => set("notificaciones", option)}
+                    className={`w-full text-left px-4 py-3.5 rounded-2xl border text-sm font-medium transition active:scale-[0.98] flex items-center justify-between gap-3 ${
+                      profile.notificaciones === option
+                        ? "bg-emerald-500/15 border-emerald-400/60 text-emerald-300"
+                        : "bg-neutral-800 border-white/10 text-white/70 hover:border-white/20"
+                    }`}
+                  >
+                    <span>{option}</span>
+                    {profile.notificaciones === option && (
                       <Check size={16} className="text-emerald-400 shrink-0" strokeWidth={3} />
                     )}
                   </button>
