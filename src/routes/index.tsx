@@ -19,6 +19,12 @@ import {
   registerConnectivitySync,
   getPendingCount,
 } from "@/services/azureApi";
+import {
+  logFatigaSample,
+  logMetricsSample,
+  logLikertResponse,
+  registerFirestoreSync,
+} from "@/services/firestoreLog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,8 +41,50 @@ type ViewId = "splash" | "dashboard" | "slider" | "metrics" | "alert" | "likert"
 // Solo estas vistas tendrán los puntitos de navegación inferiores
 const NAV_VIEWS: ViewId[] = ["dashboard", "slider", "metrics"];
 
+type CheckpointId = "inicio" | "mitad" | "fin" | "salida" | "dormir";
+type Checkpoint = { id: CheckpointId; question: string };
+
+// Dentro del horario: 3 preguntas al día (inicio, mitad y fin de turno)
+const DENTRO_TURNO_QUESTIONS: Checkpoint[] = [
+  { id: "inicio", question: "¿Cómo te sientes al iniciar tu turno?" },
+  { id: "mitad", question: "¿Cómo va tu turno hasta ahora?" },
+  { id: "fin", question: "¿Cómo te sientes al finalizar tu turno?" },
+];
+
+// Fuera del horario: 2 preguntas al día (al salir y antes de dormir)
+const FUERA_TURNO_QUESTIONS: Checkpoint[] = [
+  { id: "salida", question: "Ya saliste de tu turno, ¿cómo te sientes?" },
+  { id: "dormir", question: "Antes de dormir, ¿cómo calificarías tu día?" },
+];
+
+// Demo: tiempo entre preguntas programadas y ventana para responder antes de quedar "pendiente"
+const CHECKPOINT_INTERVAL_MS = 3 * 60 * 1000;
+const RESPONSE_WINDOW_MS = 60 * 1000;
+
+function getLikertQuestions(): Checkpoint[] {
+  if (typeof window === "undefined") return DENTRO_TURNO_QUESTIONS;
+  const pref = localStorage.getItem("sami:likert-pref");
+  return pref === "fuera" ? FUERA_TURNO_QUESTIONS : DENTRO_TURNO_QUESTIONS;
+}
+
+function formatCountdown(ms: number): string {
+  const totalSeconds = Math.max(0, Math.ceil(ms / 1000));
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = totalSeconds % 60;
+  if (h > 0) return `${h}h ${m}min`;
+  if (m > 0) return `${m}min ${s}s`;
+  return `${s}s`;
+}
+
 function WatchApp() {
   const [view, setView] = useState<ViewId>("splash");
+  const [questions] = useState(getLikertQuestions);
+  const [checkpointIndex, setCheckpointIndex] = useState(0);
+  const [nextCheckpointAt, setNextCheckpointAt] = useState(() => Date.now() + CHECKPOINT_INTERVAL_MS);
+  const [countdownMs, setCountdownMs] = useState(CHECKPOINT_INTERVAL_MS);
+  const [activeCheckpoint, setActiveCheckpoint] = useState<number | null>(null);
+  const [pendingCheckpoint, setPendingCheckpoint] = useState<number | null>(null);
 
   // 1. Quitar la pantalla de carga inicial
   useEffect(() => {
@@ -44,24 +92,70 @@ function WatchApp() {
     return () => clearTimeout(t);
   }, []);
 
-  // 2. Registrar sincronización con Azure
+  // 2. Registrar sincronización con Azure y Firestore
   useEffect(() => {
     const off = registerConnectivitySync();
-    return off;
+    const offFirestore = registerFirestoreSync();
+    return () => {
+      off();
+      offFirestore();
+    };
   }, []);
 
-  // 3. Simular Alerta de IA (a los 12 seg) y Likert automático (a los 25 seg)
+  // 3. Simular Alerta de IA (a los 12 seg)
   useEffect(() => {
     if (view !== "dashboard") return;
-    
     const alertTimer = setTimeout(() => setView("alert"), 12000); // Sale a los 12,000 milisegundos (12s)
-    const likertTimer = setTimeout(() => setView("likert"), 25000); // Sale a los 25,000 milisegundos (25s)
-    
-    return () => {
-      clearTimeout(alertTimer);
-      clearTimeout(likertTimer);
-    };
+    return () => clearTimeout(alertTimer);
   }, [view]);
+
+  // 4. Cuenta atrás para la siguiente pregunta Likert programada
+  useEffect(() => {
+    const i = setInterval(() => {
+      const diff = nextCheckpointAt - Date.now();
+      setCountdownMs(diff);
+      if (diff <= 0 && view === "dashboard" && activeCheckpoint === null) {
+        setActiveCheckpoint(checkpointIndex);
+        setView("likert");
+      }
+    }, 1000);
+    return () => clearInterval(i);
+  }, [nextCheckpointAt, view, checkpointIndex, activeCheckpoint]);
+
+  const advanceCheckpoint = () => {
+    setCheckpointIndex((i) => (i + 1) % questions.length);
+    setNextCheckpointAt(Date.now() + CHECKPOINT_INTERVAL_MS);
+  };
+
+  // El usuario respondió la pregunta (sea la programada o una pendiente)
+  const handleLikertAnswered = (value: number, checkpoint?: Checkpoint) => {
+    if (checkpoint) {
+      void logLikertResponse(checkpoint.id, checkpoint.question, value, "watch");
+    }
+    if (activeCheckpoint === pendingCheckpoint) {
+      setPendingCheckpoint(null);
+    } else {
+      advanceCheckpoint();
+    }
+    setActiveCheckpoint(null);
+    setView("dashboard");
+  };
+
+  // Pasó 1 min sin responder: la pregunta queda pendiente y el temporizador sigue
+  const handleLikertTimeout = () => {
+    if (activeCheckpoint !== pendingCheckpoint) {
+      setPendingCheckpoint(activeCheckpoint);
+      advanceCheckpoint();
+    }
+    setActiveCheckpoint(null);
+    setView("dashboard");
+  };
+
+  const openPendingQuestion = () => {
+    if (pendingCheckpoint === null) return;
+    setActiveCheckpoint(pendingCheckpoint);
+    setView("likert");
+  };
 
   const go = (next: ViewId) => setView(next);
 
@@ -77,7 +171,17 @@ function WatchApp() {
           className="relative rounded-full bg-black overflow-hidden"
           style={{ width: 320, height: 320 }}
         >
-          <WatchScreen view={view} onNavigate={go} />
+          <WatchScreen
+            view={view}
+            questions={questions}
+            activeCheckpoint={activeCheckpoint}
+            pendingCheckpoint={pendingCheckpoint}
+            countdownMs={countdownMs}
+            onNavigate={go}
+            onLikertAnswered={handleLikertAnswered}
+            onLikertTimeout={handleLikertTimeout}
+            onOpenPending={openPendingQuestion}
+          />
         </div>
 
         {/* Dots nav under watch (Solo para vistas principales) */}
@@ -100,10 +204,24 @@ function WatchApp() {
 
 function WatchScreen({
   view,
+  questions,
+  activeCheckpoint,
+  pendingCheckpoint,
+  countdownMs,
   onNavigate,
+  onLikertAnswered,
+  onLikertTimeout,
+  onOpenPending,
 }: {
   view: ViewId;
+  questions: Checkpoint[];
+  activeCheckpoint: number | null;
+  pendingCheckpoint: number | null;
+  countdownMs: number;
   onNavigate: (v: ViewId) => void;
+  onLikertAnswered: (value: number, checkpoint?: Checkpoint) => void;
+  onLikertTimeout: () => void;
+  onOpenPending: () => void;
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -120,7 +238,16 @@ function WatchScreen({
   // Vistas a pantalla completa (Alertas y Cargas)
   if (view === "splash") return <Splash />;
   if (view === "alert") return <AlertView onDismiss={() => onNavigate("dashboard")} />;
-  if (view === "likert") return <LikertPullView onSaved={() => onNavigate("dashboard")} />;
+  if (view === "likert") {
+    const checkpoint = questions[activeCheckpoint ?? 0];
+    return (
+      <LikertPullView
+        question={checkpoint?.question}
+        onSaved={(value) => onLikertAnswered(value, checkpoint)}
+        onTimeout={onLikertTimeout}
+      />
+    );
+  }
 
   // Vistas navegables por Scroll
   return (
@@ -137,9 +264,11 @@ function WatchScreen({
       }}
     >
       <section className="snap-start h-[320px] w-[320px]">
-        <Dashboard 
-          onAlert={() => onNavigate("alert")} 
-          onLikert={() => onNavigate("likert")} 
+        <Dashboard
+          onAlert={() => onNavigate("alert")}
+          countdownMs={countdownMs}
+          pendingCheckpoint={pendingCheckpoint}
+          onOpenPending={onOpenPending}
         />
       </section>
       <section className="snap-start h-[320px] w-[320px]">
@@ -174,7 +303,17 @@ function Splash() {
 }
 
 /* ---------------- Dashboard ---------------- */
-function Dashboard({ onAlert, onLikert }: { onAlert: () => void; onLikert: () => void }) {
+function Dashboard({
+  onAlert,
+  countdownMs,
+  pendingCheckpoint,
+  onOpenPending,
+}: {
+  onAlert: () => void;
+  countdownMs: number;
+  pendingCheckpoint: number | null;
+  onOpenPending: () => void;
+}) {
   const [time, setTime] = useState(() => formatTime(new Date()));
   useEffect(() => {
     const i = setInterval(() => setTime(formatTime(new Date())), 1000 * 30);
@@ -229,12 +368,17 @@ function Dashboard({ onAlert, onLikert }: { onAlert: () => void; onLikert: () =>
       </div>
 
       <div className="flex flex-col items-center gap-2">
-        <button
-          onClick={onLikert}
-          className="text-[12px] font-medium text-emerald-400 bg-emerald-400/10 px-4 py-1.5 rounded-full hover:bg-emerald-400/20 transition-colors"
-        >
-          Ultima Pregunta
-        </button>
+        <p className="text-[10px] text-white/40 font-medium tabular-nums">
+          Falta {formatCountdown(countdownMs)} para tu siguiente pregunta
+        </p>
+        {pendingCheckpoint !== null && (
+          <button
+            onClick={onOpenPending}
+            className="text-[11px] font-medium text-amber-300 bg-amber-400/10 px-4 py-1.5 rounded-full hover:bg-amber-400/20 transition-colors"
+          >
+            Responder pregunta pendiente
+          </button>
+        )}
         <button
           onClick={onAlert}
           className="text-[11px] text-white/40 hover:text-white/70 transition-colors"
@@ -307,12 +451,14 @@ function SaveFatigaButton({ value }: { value: number }) {
     <button
       onClick={async () => {
         setStatus("sending");
-        const r = await sendFatigaData(value, {
+        const metrics = {
           heartRate: 72,
           hrv: 65,
           sleepHours: 4.5,
           usagePercent: 85,
-        });
+        };
+        const r = await sendFatigaData(value, metrics);
+        void logFatigaSample(value, metrics);
         setStatus(r.sent ? "ok" : "queued");
         setTimeout(() => setStatus("idle"), 1500);
       }}
@@ -342,6 +488,7 @@ function Metrics() {
     let cancelled = false;
     (async () => {
       const r = await sendMetricsData(metricsData);
+      void logMetricsSample(metricsData);
       if (cancelled) return;
       setSynced(r.sent ? "sent" : "queued");
       setPending(getPendingCount());
@@ -456,26 +603,28 @@ function AlertView({ onDismiss }: { onDismiss: () => void }) {
 }
 
 /* ---------------- Likert Pull View ---------------- */
-export function LikertPullView({ 
-  question = "¿Qué tan satisfecho te sientes hoy?", 
-  onSaved 
-}: { 
-  question?: string; 
-  onSaved?: () => void; 
+export function LikertPullView({
+  question = "¿Qué tan satisfecho te sientes hoy?",
+  onSaved,
+  onTimeout,
+}: {
+  question?: string;
+  onSaved?: (value: number) => void;
+  onTimeout?: () => void;
 }) {
   const [isDragging, setIsDragging] = useState(false);
   const [pointer, setPointer] = useState({ x: 160, y: 160 });
   const [hoverVal, setHoverVal] = useState<number | null>(null);
   const [confirmedVal, setConfirmedVal] = useState<number | null>(null);
 
-  // Temporizador: Si pasan 60s sin interacción, se cierra automáticamente
+  // Temporizador: si pasa 1 min sin responder, queda como pregunta pendiente
   useEffect(() => {
     if (confirmedVal !== null || isDragging) return;
     const timer = setTimeout(() => {
-      if (onSaved) onSaved(); 
-    }, 60000);
+      onTimeout?.();
+    }, RESPONSE_WINDOW_MS);
     return () => clearTimeout(timer);
-  }, [isDragging, confirmedVal, onSaved]);
+  }, [isDragging, confirmedVal, onTimeout]);
 
   const segments = [
     { val: 1, color: "stroke-red-500", text: "text-red-500", rot: -65 },
@@ -530,7 +679,7 @@ export function LikertPullView({
     if (hoverVal !== null) {
       setConfirmedVal(hoverVal);
       setTimeout(() => {
-        if (onSaved) onSaved();
+        onSaved?.(hoverVal);
       }, 2000);
     } else {
       setPointer({ x: 160, y: 160 });

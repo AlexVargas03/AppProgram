@@ -1,0 +1,1468 @@
+{
+  "nodes": [
+    {
+      "id": "file::eslint_config",
+      "label": "eslint.config.js",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\eslint.config.js",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\eslint.config.js:1"
+    },
+    {
+      "id": "file::accordion",
+      "label": "accordion.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\accordion.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\accordion.tsx:1"
+    },
+    {
+      "id": "accordion::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\accordion.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\accordion.tsx:24"
+    },
+    {
+      "id": "file::alert_dialog",
+      "label": "alert-dialog.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\alert-dialog.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\alert-dialog.tsx:1"
+    },
+    {
+      "id": "file::alert",
+      "label": "alert.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\alert.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\alert.tsx:1"
+    },
+    {
+      "id": "file::aspect_ratio",
+      "label": "aspect-ratio.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\aspect-ratio.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\aspect-ratio.tsx:1"
+    },
+    {
+      "id": "file::avatar",
+      "label": "avatar.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\avatar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\avatar.tsx:1"
+    },
+    {
+      "id": "file::badge",
+      "label": "badge.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\badge.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\badge.tsx:1"
+    },
+    {
+      "id": "file::breadcrumb",
+      "label": "breadcrumb.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\breadcrumb.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\breadcrumb.tsx:1"
+    },
+    {
+      "id": "file::button",
+      "label": "button.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\button.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\button.tsx:1"
+    },
+    {
+      "id": "file::calendar",
+      "label": "calendar.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\calendar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\calendar.tsx:1"
+    },
+    {
+      "id": "file::card",
+      "label": "card.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\card.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\card.tsx:1"
+    },
+    {
+      "id": "file::carousel",
+      "label": "carousel.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\carousel.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\carousel.tsx:1"
+    },
+    {
+      "id": "carousel::usecarousel",
+      "label": "useCarousel",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\carousel.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\carousel.tsx:31"
+    },
+    {
+      "id": "file::chart",
+      "label": "chart.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\chart.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\chart.tsx:1"
+    },
+    {
+      "id": "chart::usechart",
+      "label": "useChart",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\chart.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\chart.tsx:25"
+    },
+    {
+      "id": "chart::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\chart.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\chart.tsx:50"
+    },
+    {
+      "id": "file::checkbox",
+      "label": "checkbox.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\checkbox.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\checkbox.tsx:1"
+    },
+    {
+      "id": "checkbox::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\checkbox.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\checkbox.tsx:13"
+    },
+    {
+      "id": "file::collapsible",
+      "label": "collapsible.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\collapsible.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\collapsible.tsx:1"
+    },
+    {
+      "id": "file::command",
+      "label": "command.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\command.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\command.tsx:1"
+    },
+    {
+      "id": "file::context_menu",
+      "label": "context-menu.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\context-menu.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\context-menu.tsx:1"
+    },
+    {
+      "id": "context_menu::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\context-menu.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\context-menu.tsx:27"
+    },
+    {
+      "id": "file::dialog",
+      "label": "dialog.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dialog.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dialog.tsx:1"
+    },
+    {
+      "id": "dialog::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dialog.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dialog.tsx:40"
+    },
+    {
+      "id": "file::drawer",
+      "label": "drawer.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\drawer.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\drawer.tsx:1"
+    },
+    {
+      "id": "drawer::drawer",
+      "label": "Drawer",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\drawer.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\drawer.tsx:6"
+    },
+    {
+      "id": "drawer::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\drawer.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\drawer.tsx:40"
+    },
+    {
+      "id": "file::dropdown_menu",
+      "label": "dropdown-menu.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dropdown-menu.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dropdown-menu.tsx:1"
+    },
+    {
+      "id": "dropdown_menu::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dropdown-menu.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dropdown-menu.tsx:29"
+    },
+    {
+      "id": "file::form",
+      "label": "form.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\form.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\form.tsx:1"
+    },
+    {
+      "id": "form::formfield",
+      "label": "FormField",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\form.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\form.tsx:27"
+    },
+    {
+      "id": "form::useformfield",
+      "label": "useFormField",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\form.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\form.tsx:40"
+    },
+    {
+      "id": "file::hover_card",
+      "label": "hover-card.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\hover-card.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\hover-card.tsx:1"
+    },
+    {
+      "id": "file::input_otp",
+      "label": "input-otp.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\input-otp.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\input-otp.tsx:1"
+    },
+    {
+      "id": "file::input",
+      "label": "input.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\input.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\input.tsx:1"
+    },
+    {
+      "id": "file::label",
+      "label": "label.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\label.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\label.tsx:1"
+    },
+    {
+      "id": "file::menubar",
+      "label": "menubar.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:1"
+    },
+    {
+      "id": "menubar::menubarmenu",
+      "label": "MenubarMenu",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:7"
+    },
+    {
+      "id": "menubar::menubargroup",
+      "label": "MenubarGroup",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:11"
+    },
+    {
+      "id": "menubar::menubarportal",
+      "label": "MenubarPortal",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:15"
+    },
+    {
+      "id": "menubar::menubarradiogroup",
+      "label": "MenubarRadioGroup",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:19"
+    },
+    {
+      "id": "menubar::menubarsub",
+      "label": "MenubarSub",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:23"
+    },
+    {
+      "id": "menubar::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:65"
+    },
+    {
+      "id": "file::navigation_menu",
+      "label": "navigation-menu.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\navigation-menu.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\navigation-menu.tsx:1"
+    },
+    {
+      "id": "navigation_menu::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\navigation-menu.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\navigation-menu.tsx:14"
+    },
+    {
+      "id": "file::pagination",
+      "label": "pagination.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx:1"
+    },
+    {
+      "id": "pagination::pagination",
+      "label": "Pagination",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx:7"
+    },
+    {
+      "id": "pagination::paginationprevious",
+      "label": "PaginationPrevious",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx:49"
+    },
+    {
+      "id": "pagination::paginationnext",
+      "label": "PaginationNext",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx:65"
+    },
+    {
+      "id": "pagination::paginationellipsis",
+      "label": "PaginationEllipsis",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx:78"
+    },
+    {
+      "id": "file::popover",
+      "label": "popover.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\popover.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\popover.tsx:1"
+    },
+    {
+      "id": "file::progress",
+      "label": "progress.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\progress.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\progress.tsx:1"
+    },
+    {
+      "id": "progress::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\progress.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\progress.tsx:14"
+    },
+    {
+      "id": "file::radio_group",
+      "label": "radio-group.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\radio-group.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\radio-group.tsx:1"
+    },
+    {
+      "id": "radio_group::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\radio-group.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\radio-group.tsx:22"
+    },
+    {
+      "id": "file::resizable",
+      "label": "resizable.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\resizable.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\resizable.tsx:1"
+    },
+    {
+      "id": "file::scroll_area",
+      "label": "scroll-area.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\scroll-area.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\scroll-area.tsx:1"
+    },
+    {
+      "id": "scroll_area::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\scroll-area.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\scroll-area.tsx:12"
+    },
+    {
+      "id": "file::select",
+      "label": "select.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\select.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\select.tsx:1"
+    },
+    {
+      "id": "select::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\select.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\select.tsx:21"
+    },
+    {
+      "id": "file::separator",
+      "label": "separator.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\separator.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\separator.tsx:1"
+    },
+    {
+      "id": "file::sheet",
+      "label": "sheet.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sheet.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sheet.tsx:1"
+    },
+    {
+      "id": "sheet::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sheet.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sheet.tsx:63"
+    },
+    {
+      "id": "file::sidebar",
+      "label": "sidebar.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sidebar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sidebar.tsx:1"
+    },
+    {
+      "id": "sidebar::usesidebar",
+      "label": "useSidebar",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sidebar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sidebar.tsx:40"
+    },
+    {
+      "id": "sidebar::handlekeydown",
+      "label": "handleKeyDown",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sidebar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sidebar.tsx:98"
+    },
+    {
+      "id": "file::skeleton",
+      "label": "skeleton.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\skeleton.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\skeleton.tsx:1"
+    },
+    {
+      "id": "file::slider",
+      "label": "slider.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\slider.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\slider.tsx:1"
+    },
+    {
+      "id": "slider::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\slider.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\slider.tsx:12"
+    },
+    {
+      "id": "file::sonner",
+      "label": "sonner.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sonner.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sonner.tsx:1"
+    },
+    {
+      "id": "sonner::toaster",
+      "label": "Toaster",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sonner.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sonner.tsx:5"
+    },
+    {
+      "id": "file::switch",
+      "label": "switch.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\switch.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\switch.tsx:1"
+    },
+    {
+      "id": "switch::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\switch.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\switch.tsx:11"
+    },
+    {
+      "id": "file::table",
+      "label": "table.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\table.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\table.tsx:1"
+    },
+    {
+      "id": "file::tabs",
+      "label": "tabs.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\tabs.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\tabs.tsx:1"
+    },
+    {
+      "id": "file::textarea",
+      "label": "textarea.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\textarea.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\textarea.tsx:1"
+    },
+    {
+      "id": "file::toggle_group",
+      "label": "toggle-group.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\toggle-group.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\toggle-group.tsx:1"
+    },
+    {
+      "id": "toggle_group::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\toggle-group.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\toggle-group.tsx:22"
+    },
+    {
+      "id": "file::toggle",
+      "label": "toggle.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\toggle.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\toggle.tsx:1"
+    },
+    {
+      "id": "file::tooltip",
+      "label": "tooltip.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\tooltip.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\tooltip.tsx:1"
+    },
+    {
+      "id": "file::use_auth",
+      "label": "use-auth.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-auth.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-auth.tsx:1"
+    },
+    {
+      "id": "use_auth::translatefirebaseerror",
+      "label": "translateFirebaseError",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-auth.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-auth.tsx:20"
+    },
+    {
+      "id": "use_auth::useauth",
+      "label": "useAuth",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-auth.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-auth.tsx:44"
+    },
+    {
+      "id": "file::use_mobile",
+      "label": "use-mobile.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-mobile.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-mobile.tsx:1"
+    },
+    {
+      "id": "use_mobile::useismobile",
+      "label": "useIsMobile",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-mobile.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-mobile.tsx:5"
+    },
+    {
+      "id": "file::example_functions",
+      "label": "example.functions.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\api\\example.functions.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\api\\example.functions.ts:1"
+    },
+    {
+      "id": "file::config_server",
+      "label": "config.server.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\config.server.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\config.server.ts:1"
+    },
+    {
+      "id": "config_server::getserverconfig",
+      "label": "getServerConfig",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\config.server.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\config.server.ts:19"
+    },
+    {
+      "id": "file::error_capture",
+      "label": "error-capture.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-capture.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-capture.ts:1"
+    },
+    {
+      "id": "error_capture::record",
+      "label": "record",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-capture.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-capture.ts:7"
+    },
+    {
+      "id": "error_capture::consumelastcapturederror",
+      "label": "consumeLastCapturedError",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-capture.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-capture.ts:18"
+    },
+    {
+      "id": "file::error_page",
+      "label": "error-page.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-page.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-page.ts:1"
+    },
+    {
+      "id": "error_page::rendererrorpage",
+      "label": "renderErrorPage",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-page.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-page.ts:1"
+    },
+    {
+      "id": "file::firebase",
+      "label": "firebase.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\firebase.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\firebase.ts:1"
+    },
+    {
+      "id": "file::lovable_error_reporting",
+      "label": "lovable-error-reporting.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\lovable-error-reporting.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\lovable-error-reporting.ts:1"
+    },
+    {
+      "id": "lovable_error_reporting::reportlovableerror",
+      "label": "reportLovableError",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\lovable-error-reporting.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\lovable-error-reporting.ts:21"
+    },
+    {
+      "id": "file::utils",
+      "label": "utils.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\utils.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\utils.ts:1"
+    },
+    {
+      "id": "utils::cn",
+      "label": "cn",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\utils.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\utils.ts:4"
+    },
+    {
+      "id": "file::router",
+      "label": "router.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\router.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\router.tsx:1"
+    },
+    {
+      "id": "router::getrouter",
+      "label": "getRouter",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\router.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\router.tsx:5"
+    },
+    {
+      "id": "file::index",
+      "label": "index.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\mobile\\index.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\mobile\\index.tsx:1"
+    },
+    {
+      "id": "index::go",
+      "label": "go",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\index.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\index.tsx:66"
+    },
+    {
+      "id": "index::async",
+      "label": "async",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\index.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\index.tsx:308"
+    },
+    {
+      "id": "index::handleregister",
+      "label": "handleRegister",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\mobile\\index.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\mobile\\index.tsx:255"
+    },
+    {
+      "id": "index::respond",
+      "label": "respond",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\mobile\\index.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\mobile\\index.tsx:1175"
+    },
+    {
+      "id": "file::__root",
+      "label": "__root.tsx",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\__root.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\__root.tsx:1"
+    },
+    {
+      "id": "file::routetree_gen",
+      "label": "routeTree.gen.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routeTree.gen.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routeTree.gen.ts:1"
+    },
+    {
+      "id": "file::server",
+      "label": "server.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts:1"
+    },
+    {
+      "id": "server::getserverentry",
+      "label": "getServerEntry",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts:12"
+    },
+    {
+      "id": "server::normalizecatastrophicssrresponse",
+      "label": "normalizeCatastrophicSsrResponse",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts:23"
+    },
+    {
+      "id": "server::fetch",
+      "label": "fetch",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts:41"
+    },
+    {
+      "id": "file::azureapi",
+      "label": "azureApi.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:1"
+    },
+    {
+      "id": "azureapi::getuserid",
+      "label": "getUserId",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:40"
+    },
+    {
+      "id": "azureapi::readqueue",
+      "label": "readQueue",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:52"
+    },
+    {
+      "id": "azureapi::writequeue",
+      "label": "writeQueue",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:61"
+    },
+    {
+      "id": "azureapi::enqueue",
+      "label": "enqueue",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:66"
+    },
+    {
+      "id": "azureapi::getpendingcount",
+      "label": "getPendingCount",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:76"
+    },
+    {
+      "id": "azureapi::postjson",
+      "label": "postJson",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:82"
+    },
+    {
+      "id": "azureapi::isonline",
+      "label": "isOnline",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:91"
+    },
+    {
+      "id": "azureapi::sendorqueue",
+      "label": "sendOrQueue",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:95"
+    },
+    {
+      "id": "azureapi::sendfatigadata",
+      "label": "sendFatigaData",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:116"
+    },
+    {
+      "id": "azureapi::sendmetricsdata",
+      "label": "sendMetricsData",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:133"
+    },
+    {
+      "id": "azureapi::flushqueue",
+      "label": "flushQueue",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:153"
+    },
+    {
+      "id": "azureapi::registerconnectivitysync",
+      "label": "registerConnectivitySync",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:180"
+    },
+    {
+      "id": "file::start",
+      "label": "start.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\start.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\start.ts:1"
+    },
+    {
+      "id": "file::vite_config",
+      "label": "vite.config.ts",
+      "fileType": "code",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\vite.config.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\vite.config.ts:1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file::accordion",
+      "target": "accordion::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\accordion.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\accordion.tsx:24",
+      "weight": 1
+    },
+    {
+      "source": "file::carousel",
+      "target": "carousel::usecarousel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\carousel.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\carousel.tsx:31",
+      "weight": 1
+    },
+    {
+      "source": "file::chart",
+      "target": "chart::usechart",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\chart.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\chart.tsx:25",
+      "weight": 1
+    },
+    {
+      "source": "file::chart",
+      "target": "chart::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\chart.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\chart.tsx:50",
+      "weight": 1
+    },
+    {
+      "source": "file::checkbox",
+      "target": "checkbox::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\checkbox.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\checkbox.tsx:13",
+      "weight": 1
+    },
+    {
+      "source": "file::context_menu",
+      "target": "context_menu::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\context-menu.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\context-menu.tsx:27",
+      "weight": 1
+    },
+    {
+      "source": "file::dialog",
+      "target": "dialog::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dialog.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dialog.tsx:40",
+      "weight": 1
+    },
+    {
+      "source": "file::drawer",
+      "target": "drawer::drawer",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\drawer.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\drawer.tsx:6",
+      "weight": 1
+    },
+    {
+      "source": "file::drawer",
+      "target": "drawer::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\drawer.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\drawer.tsx:40",
+      "weight": 1
+    },
+    {
+      "source": "file::dropdown_menu",
+      "target": "dropdown_menu::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dropdown-menu.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\dropdown-menu.tsx:29",
+      "weight": 1
+    },
+    {
+      "source": "file::form",
+      "target": "form::formfield",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\form.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\form.tsx:27",
+      "weight": 1
+    },
+    {
+      "source": "file::form",
+      "target": "form::useformfield",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\form.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\form.tsx:40",
+      "weight": 1
+    },
+    {
+      "source": "file::menubar",
+      "target": "menubar::menubarmenu",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:7",
+      "weight": 1
+    },
+    {
+      "source": "file::menubar",
+      "target": "menubar::menubargroup",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:11",
+      "weight": 1
+    },
+    {
+      "source": "file::menubar",
+      "target": "menubar::menubarportal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:15",
+      "weight": 1
+    },
+    {
+      "source": "file::menubar",
+      "target": "menubar::menubarradiogroup",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:19",
+      "weight": 1
+    },
+    {
+      "source": "file::menubar",
+      "target": "menubar::menubarsub",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:23",
+      "weight": 1
+    },
+    {
+      "source": "file::menubar",
+      "target": "menubar::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\menubar.tsx:65",
+      "weight": 1
+    },
+    {
+      "source": "file::navigation_menu",
+      "target": "navigation_menu::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\navigation-menu.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\navigation-menu.tsx:14",
+      "weight": 1
+    },
+    {
+      "source": "file::pagination",
+      "target": "pagination::pagination",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx:7",
+      "weight": 1
+    },
+    {
+      "source": "file::pagination",
+      "target": "pagination::paginationprevious",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx:49",
+      "weight": 1
+    },
+    {
+      "source": "file::pagination",
+      "target": "pagination::paginationnext",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx:65",
+      "weight": 1
+    },
+    {
+      "source": "file::pagination",
+      "target": "pagination::paginationellipsis",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\pagination.tsx:78",
+      "weight": 1
+    },
+    {
+      "source": "file::progress",
+      "target": "progress::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\progress.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\progress.tsx:14",
+      "weight": 1
+    },
+    {
+      "source": "file::radio_group",
+      "target": "radio_group::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\radio-group.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\radio-group.tsx:22",
+      "weight": 1
+    },
+    {
+      "source": "file::scroll_area",
+      "target": "scroll_area::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\scroll-area.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\scroll-area.tsx:12",
+      "weight": 1
+    },
+    {
+      "source": "file::select",
+      "target": "select::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\select.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\select.tsx:21",
+      "weight": 1
+    },
+    {
+      "source": "file::sheet",
+      "target": "sheet::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sheet.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sheet.tsx:63",
+      "weight": 1
+    },
+    {
+      "source": "file::sidebar",
+      "target": "sidebar::usesidebar",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sidebar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sidebar.tsx:40",
+      "weight": 1
+    },
+    {
+      "source": "file::sidebar",
+      "target": "sidebar::handlekeydown",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sidebar.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sidebar.tsx:98",
+      "weight": 1
+    },
+    {
+      "source": "file::slider",
+      "target": "slider::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\slider.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\slider.tsx:12",
+      "weight": 1
+    },
+    {
+      "source": "file::sonner",
+      "target": "sonner::toaster",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sonner.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\sonner.tsx:5",
+      "weight": 1
+    },
+    {
+      "source": "file::switch",
+      "target": "switch::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\switch.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\switch.tsx:11",
+      "weight": 1
+    },
+    {
+      "source": "file::toggle_group",
+      "target": "toggle_group::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\toggle-group.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\components\\ui\\toggle-group.tsx:22",
+      "weight": 1
+    },
+    {
+      "source": "file::use_auth",
+      "target": "use_auth::translatefirebaseerror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-auth.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-auth.tsx:20",
+      "weight": 1
+    },
+    {
+      "source": "file::use_auth",
+      "target": "use_auth::useauth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-auth.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-auth.tsx:44",
+      "weight": 1
+    },
+    {
+      "source": "file::use_mobile",
+      "target": "use_mobile::useismobile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-mobile.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\hooks\\use-mobile.tsx:5",
+      "weight": 1
+    },
+    {
+      "source": "file::config_server",
+      "target": "config_server::getserverconfig",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\config.server.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\config.server.ts:19",
+      "weight": 1
+    },
+    {
+      "source": "file::error_capture",
+      "target": "error_capture::record",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-capture.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-capture.ts:7",
+      "weight": 1
+    },
+    {
+      "source": "file::error_capture",
+      "target": "error_capture::consumelastcapturederror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-capture.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-capture.ts:18",
+      "weight": 1
+    },
+    {
+      "source": "file::error_page",
+      "target": "error_page::rendererrorpage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-page.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\error-page.ts:1",
+      "weight": 1
+    },
+    {
+      "source": "file::lovable_error_reporting",
+      "target": "lovable_error_reporting::reportlovableerror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\lovable-error-reporting.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\lovable-error-reporting.ts:21",
+      "weight": 1
+    },
+    {
+      "source": "file::utils",
+      "target": "utils::cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\utils.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\lib\\utils.ts:4",
+      "weight": 1
+    },
+    {
+      "source": "file::router",
+      "target": "router::getrouter",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\router.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\router.tsx:5",
+      "weight": 1
+    },
+    {
+      "source": "file::index",
+      "target": "index::go",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\index.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\index.tsx:66",
+      "weight": 1
+    },
+    {
+      "source": "file::index",
+      "target": "index::async",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\index.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\index.tsx:308",
+      "weight": 1
+    },
+    {
+      "source": "file::index",
+      "target": "index::handleregister",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\mobile\\index.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\mobile\\index.tsx:255",
+      "weight": 1
+    },
+    {
+      "source": "file::index",
+      "target": "index::respond",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\mobile\\index.tsx",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\routes\\mobile\\index.tsx:1175",
+      "weight": 1
+    },
+    {
+      "source": "file::server",
+      "target": "server::getserverentry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts:12",
+      "weight": 1
+    },
+    {
+      "source": "file::server",
+      "target": "server::normalizecatastrophicssrresponse",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts:23",
+      "weight": 1
+    },
+    {
+      "source": "file::server",
+      "target": "server::fetch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\server.ts:41",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::getuserid",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:40",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::readqueue",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:52",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::writequeue",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:61",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::enqueue",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:66",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::getpendingcount",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:76",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::postjson",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:82",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::isonline",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:91",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::sendorqueue",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:95",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::sendfatigadata",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:116",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::sendmetricsdata",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:133",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::flushqueue",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:153",
+      "weight": 1
+    },
+    {
+      "source": "file::azureapi",
+      "target": "azureapi::registerconnectivitysync",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "sourceFile": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts",
+      "sourceLocation": "C:\\Users\\alexp\\Documents\\AppProgram\\AppProgram\\src\\services\\azureApi.ts:180",
+      "weight": 1
+    }
+  ],
+  "metadata": {
+    "files": 66,
+    "nodes": 127,
+    "edges": 63,
+    "builtAt": "2026-06-13T15:33:07.595Z"
+  }
+}

@@ -28,6 +28,14 @@ import {
   registerConnectivitySync,
   getPendingCount,
 } from "@/services/azureApi";
+import {
+  logProfile,
+  logQuizAnswers,
+  logFatigaSample,
+  logMetricsSample,
+  logLikertPref,
+  registerFirestoreSync,
+} from "@/services/firestoreLog";
 import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/mobile/")({
@@ -43,7 +51,8 @@ export const Route = createFileRoute("/mobile/")({
 type Tab = "home" | "metrics" | "fatigue" | "sami" | "profile";
 type AppView = "login" | "register" | "onboarding" | "quiz" | "app";
 
-const DEMO_MODE = !import.meta.env.VITE_FIREBASE_API_KEY;
+const DEMO_MODE =
+  import.meta.env.VITE_DEMO_MODE === "true" || !import.meta.env.VITE_FIREBASE_API_KEY;
 
 function MobileApp() {
   const { user, loading: authLoading, error: authError, login, register, logout } = useAuth();
@@ -52,7 +61,11 @@ function MobileApp() {
 
   useEffect(() => {
     const off = registerConnectivitySync();
-    return off;
+    const offFirestore = registerFirestoreSync();
+    return () => {
+      off();
+      offFirestore();
+    };
   }, []);
 
   useEffect(() => {
@@ -393,6 +406,7 @@ function QuizScreen({ uid, onDone }: { uid: string; onDone: () => void }) {
     if (isLast) {
       localStorage.setItem(`sami:quiz:${uid}`, "true");
       localStorage.setItem(`sami:quiz-answers:${uid}`, JSON.stringify(next));
+      void logQuizAnswers(next);
       onDone();
     } else {
       setAnswers(next);
@@ -488,6 +502,21 @@ const NOTIFICACION_OPTIONS = [
   "Cada 2 horas durante el turno",
 ];
 
+type LikertPref = "dentro" | "fuera";
+
+const LIKERT_PREF_OPTIONS: { value: LikertPref; label: string; desc: string }[] = [
+  {
+    value: "dentro",
+    label: "Dentro del horario",
+    desc: "3 preguntas al día: inicio, mitad y fin de turno",
+  },
+  {
+    value: "fuera",
+    label: "Fuera del horario",
+    desc: "2 preguntas al día: al salir y antes de dormir",
+  },
+];
+
 function OnboardingScreen({ uid, onDone }: { uid: string; onDone: () => void }) {
   const [step, setStep] = useState(0);
   const [profile, setProfile] = useState<OnboardingProfile>({
@@ -521,6 +550,7 @@ function OnboardingScreen({ uid, onDone }: { uid: string; onDone: () => void }) 
     if (isLast) {
       localStorage.setItem(`sami:onboarded:${uid}`, "true");
       localStorage.setItem(`sami:profile:${uid}`, JSON.stringify(profile));
+      void logProfile(profile);
       onDone();
     } else {
       setStep(step + 1);
@@ -737,6 +767,16 @@ function ProfileScreen({ uid, onLogout }: { uid: string; onLogout: () => void })
   const raw = localStorage.getItem(`sami:profile:${uid}`);
   const profile: UserProfile | null = raw ? (JSON.parse(raw) as UserProfile) : null;
 
+  const [likertPref, setLikertPref] = useState<LikertPref>(
+    () => (localStorage.getItem("sami:likert-pref") as LikertPref | null) ?? "dentro",
+  );
+
+  const selectLikertPref = (value: LikertPref) => {
+    setLikertPref(value);
+    localStorage.setItem("sami:likert-pref", value);
+    void logLikertPref(value);
+  };
+
   const initials = profile?.nombre
     ? profile.nombre
         .split(" ")
@@ -811,6 +851,32 @@ function ProfileScreen({ uid, onLogout }: { uid: string; onLogout: () => void })
         <p className="text-white/30 text-sm text-center">No hay datos de perfil guardados.</p>
       )}
 
+      {/* Preguntas de bienestar */}
+      <div className="flex flex-col gap-2.5">
+        <p className="text-white/50 text-xs font-medium uppercase tracking-wider px-1">
+          Preguntas de bienestar
+        </p>
+        {LIKERT_PREF_OPTIONS.map((option) => (
+          <button
+            key={option.value}
+            onClick={() => selectLikertPref(option.value)}
+            className={`w-full text-left px-4 py-3.5 rounded-2xl border text-sm font-medium transition active:scale-[0.98] flex items-center justify-between gap-3 ${
+              likertPref === option.value
+                ? "bg-emerald-500/15 border-emerald-400/60 text-emerald-300"
+                : "bg-neutral-800 border-white/10 text-white/70 hover:border-white/20"
+            }`}
+          >
+            <div className="flex flex-col gap-0.5">
+              <span>{option.label}</span>
+              <span className="text-white/40 text-xs font-normal">{option.desc}</span>
+            </div>
+            {likertPref === option.value && (
+              <Check size={16} className="text-emerald-400 shrink-0" strokeWidth={3} />
+            )}
+          </button>
+        ))}
+      </div>
+
       {/* Cerrar sesión */}
       <button
         onClick={onLogout}
@@ -839,7 +905,9 @@ function DashboardScreen({ onLogout }: { onLogout: () => void }) {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const r = await sendMetricsData({ hrv: 65, heartRate: 72, sleepHours: 4.5 });
+      const metricsData = { hrv: 65, heartRate: 72, sleepHours: 4.5 };
+      const r = await sendMetricsData(metricsData);
+      void logMetricsSample(metricsData);
       if (cancelled) return;
       setSynced(r.sent ? "sent" : "queued");
       setPending(getPendingCount());
@@ -972,12 +1040,14 @@ function MetricasScreen() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const r = await sendMetricsData({
+      const metricsData = {
         hrv: 65,
         heartRate: 72,
         sleepHours: 4.5,
         usagePercent: 85,
-      });
+      };
+      const r = await sendMetricsData(metricsData);
+      void logMetricsSample(metricsData);
       if (cancelled) return;
       setSynced(r.sent ? "sent" : "queued");
       setPending(getPendingCount());
@@ -1096,12 +1166,14 @@ function FatigaScreen() {
 
   const save = async () => {
     setStatus("sending");
-    const r = await sendFatigaData(value, {
+    const metrics = {
       hrv: 65,
       heartRate: 72,
       sleepHours: 4.5,
       usagePercent: 85,
-    });
+    };
+    const r = await sendFatigaData(value, metrics);
+    void logFatigaSample(value, metrics);
     setStatus(r.sent ? "ok" : "queued");
     setTimeout(() => setStatus("idle"), 1500);
   };
@@ -1174,12 +1246,14 @@ function SamiScreen() {
 
   const respond = async (accepted: boolean) => {
     setSending(true);
-    await sendFatigaData(72, {
+    const metrics = {
       hrv: 32,
       heartRate: 78,
       sleepHours: 310 / 60,
       usagePercent: 88,
-    });
+    };
+    await sendFatigaData(72, metrics);
+    void logFatigaSample(72, metrics);
     setSending(false);
     setState(accepted ? "accepted" : "ignored");
   };
