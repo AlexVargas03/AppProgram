@@ -41,7 +41,7 @@ export const Route = createFileRoute("/mobile/")({
 });
 
 type Tab = "home" | "metrics" | "fatigue" | "sami" | "profile";
-type AppView = "login" | "register" | "onboarding" | "app";
+type AppView = "login" | "register" | "onboarding" | "quiz" | "app";
 
 const DEMO_MODE = !import.meta.env.VITE_FIREBASE_API_KEY;
 
@@ -62,8 +62,9 @@ function MobileApp() {
       setView((v) => (v === "register" ? "register" : "login"));
       return;
     }
-    const done = localStorage.getItem(`sami:onboarded:${user.uid}`) === "true";
-    setView(done ? "app" : "onboarding");
+    const onboarded = localStorage.getItem(`sami:onboarded:${user.uid}`) === "true";
+    const quizDone = localStorage.getItem(`sami:quiz:${user.uid}`) === "true";
+    setView(!onboarded ? "onboarding" : !quizDone ? "quiz" : "app");
   }, [user, authLoading]);
 
   if (!DEMO_MODE && authLoading) {
@@ -98,7 +99,11 @@ function MobileApp() {
   }
 
   if (view === "onboarding") {
-    return <OnboardingScreen uid={user?.uid ?? "demo"} onDone={() => setView("app")} />;
+    return <OnboardingScreen uid={user?.uid ?? "demo"} onDone={() => setView("quiz")} />;
+  }
+
+  if (view === "quiz") {
+    return <QuizScreen uid={user?.uid ?? "demo"} onDone={() => setView("app")} />;
   }
 
   return (
@@ -322,6 +327,128 @@ function RegisterScreen({
         >
           ¿Ya tienes cuenta? <span className="text-emerald-400 font-medium">Iniciar sesión</span>
         </button>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────── Quiz Clínico ─────────────── */
+
+type QuizDimension = "D" | "RP";
+
+const QUIZ_QUESTIONS: {
+  id: number;
+  dimension: QuizDimension;
+  subtitulo: string;
+  pregunta: string;
+}[] = [
+  {
+    id: 1,
+    dimension: "D",
+    subtitulo: "Atención mecánica",
+    pregunta:
+      "Doctor/a, ¿sintió que la alta demanda de hoy le obligó a atender de manera más mecánica o apresurada de lo habitual?",
+  },
+  {
+    id: 2,
+    dimension: "D",
+    subtitulo: "Desconexión mental",
+    pregunta:
+      "Debido a la carga del turno, ¿sintió la necesidad de desconectarse emocionalmente de los casos para poder continuar?",
+  },
+  {
+    id: 3,
+    dimension: "D",
+    subtitulo: "Fricción externa",
+    pregunta:
+      "¿Tuvo que enfrentar hoy quejas de pacientes o familiares por limitaciones administrativas que escapan de su control médico?",
+  },
+  {
+    id: 4,
+    dimension: "RP",
+    subtitulo: "Efectividad",
+    pregunta:
+      "A pesar del agotamiento, ¿siente que mantuvo total seguridad clínica en sus decisiones durante esta guardia?",
+  },
+  {
+    id: 5,
+    dimension: "RP",
+    subtitulo: "Propósito",
+    pregunta:
+      "¿Atendió hoy algún caso o diagnóstico específico que le haya dejado una clara satisfacción profesional?",
+  },
+];
+
+function QuizScreen({ uid, onDone }: { uid: string; onDone: () => void }) {
+  const [index, setIndex] = useState(0);
+  const [answers, setAnswers] = useState<
+    { questionId: number; dimension: QuizDimension; answer: "SI" | "NO" }[]
+  >([]);
+
+  const current = QUIZ_QUESTIONS[index];
+  const isLast = index === QUIZ_QUESTIONS.length - 1;
+
+  const respond = (answer: "SI" | "NO") => {
+    const next = [...answers, { questionId: current.id, dimension: current.dimension, answer }];
+    if (isLast) {
+      localStorage.setItem(`sami:quiz:${uid}`, "true");
+      localStorage.setItem(`sami:quiz-answers:${uid}`, JSON.stringify(next));
+      onDone();
+    } else {
+      setAnswers(next);
+      setIndex(index + 1);
+    }
+  };
+
+  const isD = current.dimension === "D";
+
+  return (
+    <div className="min-h-screen bg-neutral-950 flex flex-col p-6">
+      <div className="max-w-sm mx-auto w-full flex flex-col flex-1 gap-8 pt-10">
+        {/* Progreso */}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <span
+              className={`text-xs font-semibold px-3 py-1 rounded-full border ${
+                isD
+                  ? "bg-amber-500/10 text-amber-300 border-amber-400/20"
+                  : "bg-emerald-500/10 text-emerald-300 border-emerald-400/20"
+              }`}
+            >
+              {isD ? "Despersonalización" : "Realización Personal"} · {current.subtitulo}
+            </span>
+            <span className="text-white/30 text-xs font-medium tabular-nums">
+              {index + 1} / {QUIZ_QUESTIONS.length}
+            </span>
+          </div>
+          <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+            <div
+              className={`h-full rounded-full transition-all duration-500 ${isD ? "bg-amber-400" : "bg-emerald-500"}`}
+              style={{ width: `${((index + 1) / QUIZ_QUESTIONS.length) * 100}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Pregunta */}
+        <div className="flex-1 flex flex-col justify-center">
+          <p className="text-white font-semibold text-xl leading-snug">{current.pregunta}</p>
+        </div>
+
+        {/* Botones */}
+        <div className="flex flex-col gap-3 pb-4">
+          <button
+            onClick={() => respond("SI")}
+            className="w-full h-16 rounded-2xl bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] transition text-black font-bold text-lg"
+          >
+            Sí
+          </button>
+          <button
+            onClick={() => respond("NO")}
+            className="w-full h-16 rounded-2xl bg-neutral-800 hover:bg-neutral-700 active:scale-[0.98] transition text-white/80 font-semibold text-lg"
+          >
+            No
+          </button>
+        </div>
       </div>
     </div>
   );
