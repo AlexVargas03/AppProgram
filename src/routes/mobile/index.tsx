@@ -15,6 +15,12 @@ import {
   Bluetooth,
   ShieldAlert,
   LogOut,
+  ChevronRight,
+  UserCircle,
+  Building2,
+  Calendar,
+  Stethoscope,
+  Venus,
 } from "lucide-react";
 import {
   sendFatigaData,
@@ -34,10 +40,14 @@ export const Route = createFileRoute("/mobile/")({
   component: MobileApp,
 });
 
-type Tab = "home" | "metrics" | "fatigue" | "sami";
+type Tab = "home" | "metrics" | "fatigue" | "sami" | "profile";
+type AppView = "login" | "register" | "onboarding" | "app";
+
+const DEMO_MODE = !import.meta.env.VITE_FIREBASE_API_KEY;
 
 function MobileApp() {
-  const { user, loading: authLoading, error: authError, login, logout } = useAuth();
+  const { user, loading: authLoading, error: authError, login, register, logout } = useAuth();
+  const [view, setView] = useState<AppView>("login");
   const [tab, setTab] = useState<Tab>("home");
 
   useEffect(() => {
@@ -45,17 +55,67 @@ function MobileApp() {
     return off;
   }, []);
 
-  if (!user) {
-    return <LoginScreen login={login} loading={authLoading} error={authError} />;
+  useEffect(() => {
+    if (DEMO_MODE) return;
+    if (authLoading) return;
+    if (!user) {
+      setView((v) => (v === "register" ? "register" : "login"));
+      return;
+    }
+    const done = localStorage.getItem(`sami:onboarded:${user.uid}`) === "true";
+    setView(done ? "app" : "onboarding");
+  }, [user, authLoading]);
+
+  if (!DEMO_MODE && authLoading) {
+    return (
+      <div className="min-h-screen bg-neutral-950 flex items-center justify-center">
+        <span className="h-8 w-8 rounded-full border-2 border-emerald-500/30 border-t-emerald-400 animate-spin" />
+      </div>
+    );
+  }
+
+  if (view === "login") {
+    return (
+      <LoginScreen
+        login={login}
+        loading={authLoading}
+        error={authError}
+        onRegister={() => setView("register")}
+        onDemo={DEMO_MODE ? () => setView("onboarding") : undefined}
+      />
+    );
+  }
+
+  if (view === "register") {
+    return (
+      <RegisterScreen
+        register={register}
+        loading={authLoading}
+        error={authError}
+        onLogin={() => setView("login")}
+      />
+    );
+  }
+
+  if (view === "onboarding") {
+    return <OnboardingScreen uid={user?.uid ?? "demo"} onDone={() => setView("app")} />;
   }
 
   return (
     <div className="min-h-screen bg-neutral-950 pb-20">
       <div className="max-w-md mx-auto px-4 pt-6">
-        {tab === "home" && <DashboardScreen onLogout={logout} />}
+        {tab === "home" && (
+          <DashboardScreen onLogout={DEMO_MODE ? () => setView("login") : logout} />
+        )}
         {tab === "metrics" && <MetricasScreen />}
         {tab === "fatigue" && <FatigaScreen />}
         {tab === "sami" && <SamiScreen />}
+        {tab === "profile" && (
+          <ProfileScreen
+            uid={user?.uid ?? "demo"}
+            onLogout={DEMO_MODE ? () => setView("login") : logout}
+          />
+        )}
       </div>
 
       <nav className="fixed bottom-0 left-0 right-0 bg-neutral-900 border-t border-white/10 flex items-center justify-around px-2 py-3">
@@ -65,6 +125,7 @@ function MobileApp() {
             { id: "metrics", icon: Activity, label: "Métricas" },
             { id: "fatigue", icon: SlidersHorizontal, label: "Fatiga" },
             { id: "sami", icon: MessageCircle, label: "Sami" },
+            { id: "profile", icon: UserCircle, label: "Perfil" },
           ] as const
         ).map(({ id, icon: Icon, label }) => (
           <button
@@ -89,10 +150,14 @@ function LoginScreen({
   login,
   loading,
   error,
+  onRegister,
+  onDemo,
 }: {
   login: (e: string, p: string) => Promise<void>;
   loading: boolean;
   error: string | null;
+  onRegister: () => void;
+  onDemo?: () => void;
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -143,7 +208,412 @@ function LoginScreen({
             {loading ? "Verificando..." : "Entrar"}
           </button>
         </div>
+
+        <button
+          onClick={onRegister}
+          className="mt-5 w-full text-center text-white/40 text-sm hover:text-white/70 transition"
+        >
+          ¿Sin cuenta? <span className="text-emerald-400 font-medium">Regístrate</span>
+        </button>
+
+        {onDemo && (
+          <button
+            onClick={onDemo}
+            className="mt-3 w-full text-center text-white/20 text-xs hover:text-white/40 transition"
+          >
+            Ver demo sin cuenta
+          </button>
+        )}
       </div>
+    </div>
+  );
+}
+
+/* ─────────────── Register ─────────────── */
+
+function RegisterScreen({
+  register,
+  loading,
+  error,
+  onLogin,
+}: {
+  register: (e: string, p: string) => Promise<void>;
+  loading: boolean;
+  error: string | null;
+  onLogin: () => void;
+}) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [localError, setLocalError] = useState<string | null>(null);
+
+  const handleRegister = () => {
+    if (password !== confirm) {
+      setLocalError("Las contraseñas no coinciden.");
+      return;
+    }
+    if (password.length < 6) {
+      setLocalError("La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+    setLocalError(null);
+    void register(email, password);
+  };
+
+  const displayError = localError ?? error;
+
+  return (
+    <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6">
+      <div className="w-full max-w-sm">
+        <div className="flex flex-col items-center mb-10">
+          <div className="relative">
+            <div className="absolute inset-0 rounded-full bg-sky-500/30 blur-xl animate-pulse" />
+            <div className="relative h-16 w-16 rounded-full bg-sky-500/10 flex items-center justify-center border border-sky-400/40">
+              <Bluetooth className="text-sky-300 animate-pulse" size={32} />
+            </div>
+          </div>
+          <p className="mt-5 text-white text-xl font-semibold tracking-tight">Crear cuenta</p>
+          <p className="text-white/40 text-sm">Registro de médico</p>
+        </div>
+
+        <div className="bg-neutral-900 rounded-3xl p-8 flex flex-col gap-4">
+          <input
+            type="email"
+            placeholder="Correo institucional"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full h-12 rounded-xl bg-neutral-800 border border-white/10 px-4 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-emerald-500/60 transition"
+          />
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full h-12 rounded-xl bg-neutral-800 border border-white/10 px-4 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-emerald-500/60 transition"
+          />
+          <input
+            type="password"
+            placeholder="Confirmar contraseña"
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !loading) handleRegister();
+            }}
+            className="w-full h-12 rounded-xl bg-neutral-800 border border-white/10 px-4 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-emerald-500/60 transition"
+          />
+
+          {displayError && <p className="text-red-400 text-sm text-center">{displayError}</p>}
+
+          <button
+            onClick={handleRegister}
+            disabled={loading}
+            className="w-full h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] transition text-black font-semibold text-sm disabled:opacity-60 flex items-center justify-center gap-2"
+          >
+            {loading && (
+              <span className="h-4 w-4 rounded-full border-2 border-black/40 border-t-black animate-spin" />
+            )}
+            {loading ? "Creando cuenta..." : "Crear cuenta"}
+          </button>
+        </div>
+
+        <button
+          onClick={onLogin}
+          className="mt-5 w-full text-center text-white/40 text-sm hover:text-white/70 transition"
+        >
+          ¿Ya tienes cuenta? <span className="text-emerald-400 font-medium">Iniciar sesión</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────── Onboarding ─────────────── */
+
+const TOTAL_STEPS = 3;
+
+type OnboardingProfile = {
+  nombre: string;
+  edad: string;
+  profesion: string;
+  instituto: string;
+  genero: string;
+};
+
+const GENERO_OPTIONS = ["Masculino", "Femenino", "No binario", "Prefiero no decir"];
+
+function OnboardingScreen({ uid, onDone }: { uid: string; onDone: () => void }) {
+  const [step, setStep] = useState(0);
+  const [profile, setProfile] = useState<OnboardingProfile>({
+    nombre: "",
+    edad: "",
+    profesion: "",
+    instituto: "",
+    genero: "",
+  });
+
+  const isLast = step === TOTAL_STEPS - 1;
+
+  const set = (key: keyof OnboardingProfile, value: string) =>
+    setProfile((p) => ({ ...p, [key]: value }));
+
+  const stepValid =
+    step === 0
+      ? profile.nombre.trim() !== "" && profile.edad.trim() !== "" && Number(profile.edad) > 0
+      : step === 1
+        ? profile.profesion.trim() !== "" && profile.instituto.trim() !== ""
+        : profile.genero !== "";
+
+  const advance = () => {
+    if (!stepValid) return;
+    if (isLast) {
+      localStorage.setItem(`sami:onboarded:${uid}`, "true");
+      localStorage.setItem(`sami:profile:${uid}`, JSON.stringify(profile));
+      onDone();
+    } else {
+      setStep(step + 1);
+    }
+  };
+
+  const inputClass =
+    "w-full h-12 rounded-xl bg-neutral-800 border border-white/10 px-4 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-emerald-500/60 transition";
+
+  return (
+    <div className="min-h-screen bg-neutral-950 flex flex-col p-6">
+      <div className="max-w-sm mx-auto w-full flex flex-col flex-1 gap-8 pt-12">
+        {/* Logo */}
+        <div className="flex flex-col items-center gap-3">
+          <div className="relative">
+            <div className="absolute inset-0 rounded-full bg-sky-500/20 blur-xl" />
+            <div className="relative h-12 w-12 rounded-full bg-sky-500/10 flex items-center justify-center border border-sky-400/30">
+              <Bluetooth className="text-sky-300" size={24} />
+            </div>
+          </div>
+          <p className="text-white/50 text-xs font-medium tracking-wider uppercase">
+            Configuración inicial
+          </p>
+        </div>
+
+        {/* Progress dots */}
+        <div className="flex items-center justify-center gap-2">
+          {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
+            <div
+              key={i}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === step
+                  ? "bg-emerald-400 w-6"
+                  : i < step
+                    ? "bg-emerald-400/50 w-2"
+                    : "bg-white/20 w-2"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Steps */}
+        <div className="flex flex-col gap-5 flex-1">
+          {step === 0 && (
+            <>
+              <p className="text-white font-semibold text-lg leading-snug">Cuéntanos sobre ti</p>
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-white/50 text-xs font-medium uppercase tracking-wider px-1">
+                    Nombre y apellido
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Ej. María García"
+                    value={profile.nombre}
+                    onChange={(e) => set("nombre", e.target.value)}
+                    className={inputClass}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-white/50 text-xs font-medium uppercase tracking-wider px-1">
+                    Edad
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Ej. 32"
+                    min={18}
+                    max={99}
+                    value={profile.edad}
+                    onChange={(e) => set("edad", e.target.value)}
+                    className={inputClass}
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
+          {step === 1 && (
+            <>
+              <p className="text-white font-semibold text-lg leading-snug">Datos profesionales</p>
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-white/50 text-xs font-medium uppercase tracking-wider px-1">
+                    Profesión
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Ej. Médico residente"
+                    value={profile.profesion}
+                    onChange={(e) => set("profesion", e.target.value)}
+                    className={inputClass}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-white/50 text-xs font-medium uppercase tracking-wider px-1">
+                    Nombre del instituto
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Ej. Hospital Nacional Arzobispo Loayza"
+                    value={profile.instituto}
+                    onChange={(e) => set("instituto", e.target.value)}
+                    className={inputClass}
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
+          {step === 2 && (
+            <>
+              <p className="text-white font-semibold text-lg leading-snug">
+                ¿Con qué género te identificas?
+              </p>
+              <div className="flex flex-col gap-2.5">
+                {GENERO_OPTIONS.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => set("genero", option)}
+                    className={`w-full text-left px-4 py-3.5 rounded-2xl border text-sm font-medium transition active:scale-[0.98] flex items-center justify-between gap-3 ${
+                      profile.genero === option
+                        ? "bg-emerald-500/15 border-emerald-400/60 text-emerald-300"
+                        : "bg-neutral-800 border-white/10 text-white/70 hover:border-white/20"
+                    }`}
+                  >
+                    <span>{option}</span>
+                    {profile.genero === option && (
+                      <Check size={16} className="text-emerald-400 shrink-0" strokeWidth={3} />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* CTA */}
+        <button
+          onClick={advance}
+          disabled={!stepValid}
+          className="w-full h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] transition text-black font-semibold text-sm disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        >
+          {isLast ? "Comenzar" : "Continuar"}
+          {!isLast && <ChevronRight size={16} strokeWidth={2.5} />}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────── Perfil ─────────────── */
+
+type UserProfile = {
+  nombre: string;
+  edad: string;
+  profesion: string;
+  instituto: string;
+  genero: string;
+};
+
+function ProfileScreen({ uid, onLogout }: { uid: string; onLogout: () => void }) {
+  const raw = localStorage.getItem(`sami:profile:${uid}`);
+  const profile: UserProfile | null = raw ? (JSON.parse(raw) as UserProfile) : null;
+
+  const initials = profile?.nombre
+    ? profile.nombre
+        .split(" ")
+        .slice(0, 2)
+        .map((w) => w[0]?.toUpperCase() ?? "")
+        .join("")
+    : "?";
+
+  const rows = profile
+    ? [
+        {
+          icon: <Calendar size={16} className="text-emerald-400" />,
+          label: "Edad",
+          value: `${profile.edad} años`,
+        },
+        {
+          icon: <Stethoscope size={16} className="text-sky-400" />,
+          label: "Profesión",
+          value: profile.profesion,
+        },
+        {
+          icon: <Building2 size={16} className="text-violet-400" />,
+          label: "Instituto",
+          value: profile.instituto,
+        },
+        {
+          icon: <Venus size={16} className="text-pink-400" />,
+          label: "Género",
+          value: profile.genero,
+        },
+      ]
+    : [];
+
+  return (
+    <div className="flex flex-col gap-6">
+      <p className="text-white font-semibold text-lg tracking-tight">Mi perfil</p>
+
+      {/* Avatar + nombre */}
+      <div className="bg-neutral-900 rounded-3xl p-6 flex flex-col items-center gap-4">
+        <div className="h-20 w-20 rounded-full bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center">
+          <span className="text-emerald-300 text-2xl font-bold tracking-tight">{initials}</span>
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <p className="text-white font-semibold text-xl tracking-tight">
+            {profile?.nombre ?? "Sin nombre"}
+          </p>
+          <p className="text-white/40 text-sm">{profile?.profesion ?? "—"}</p>
+        </div>
+      </div>
+
+      {/* Datos */}
+      {profile ? (
+        <div className="flex flex-col gap-2.5">
+          {rows.map((row) => (
+            <div
+              key={row.label}
+              className="flex items-center justify-between bg-neutral-900 rounded-2xl px-5 py-3.5"
+            >
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center">
+                  {row.icon}
+                </div>
+                <span className="text-white/50 text-sm">{row.label}</span>
+              </div>
+              <span className="text-white text-sm font-medium text-right max-w-[55%] leading-snug">
+                {row.value}
+              </span>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-white/30 text-sm text-center">No hay datos de perfil guardados.</p>
+      )}
+
+      {/* Cerrar sesión */}
+      <button
+        onClick={onLogout}
+        className="w-full h-12 rounded-full bg-neutral-800 hover:bg-neutral-700 active:scale-[0.98] transition text-white/60 text-sm font-medium flex items-center justify-center gap-2"
+      >
+        <LogOut size={16} />
+        Cerrar sesión
+      </button>
     </div>
   );
 }
