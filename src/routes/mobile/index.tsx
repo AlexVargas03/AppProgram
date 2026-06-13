@@ -21,7 +21,14 @@ import {
   Calendar,
   Stethoscope,
   Venus,
+  ShoppingBag,
+  BookOpen,
+  Tag,
+  Video,
+  GraduationCap,
+  Star,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import {
   sendFatigaData,
   sendMetricsData,
@@ -37,6 +44,8 @@ import {
   registerFirestoreSync,
 } from "@/services/firestoreLog";
 import { useAuth } from "@/hooks/use-auth";
+import { cn } from "@/lib/utils";
+import { getBalance, addPoints, spendPoints, getRedeemed } from "@/lib/points";
 
 export const Route = createFileRoute("/mobile/")({
   head: () => ({
@@ -48,7 +57,7 @@ export const Route = createFileRoute("/mobile/")({
   component: MobileApp,
 });
 
-type Tab = "home" | "metrics" | "fatigue" | "sami" | "profile";
+type Tab = "home" | "metrics" | "fatigue" | "sami" | "tienda" | "profile";
 type AppView = "login" | "register" | "onboarding" | "quiz" | "app";
 
 const DEMO_MODE =
@@ -128,6 +137,7 @@ function MobileApp() {
         {tab === "metrics" && <MetricasScreen />}
         {tab === "fatigue" && <FatigaScreen />}
         {tab === "sami" && <SamiScreen />}
+        {tab === "tienda" && <StoreScreen />}
         {tab === "profile" && (
           <ProfileScreen
             uid={user?.uid ?? "demo"}
@@ -143,6 +153,7 @@ function MobileApp() {
             { id: "metrics", icon: Activity, label: "Métricas" },
             { id: "fatigue", icon: SlidersHorizontal, label: "Fatiga" },
             { id: "sami", icon: MessageCircle, label: "Sami" },
+            { id: "tienda", icon: ShoppingBag, label: "Tienda" },
             { id: "profile", icon: UserCircle, label: "Perfil" },
           ] as const
         ).map(({ id, icon: Icon, label }) => (
@@ -407,6 +418,7 @@ function QuizScreen({ uid, onDone }: { uid: string; onDone: () => void }) {
       localStorage.setItem(`sami:quiz:${uid}`, "true");
       localStorage.setItem(`sami:quiz-answers:${uid}`, JSON.stringify(next));
       void logQuizAnswers(next);
+      addPoints(50, "Bono quiz inicial");
       onDone();
     } else {
       setAnswers(next);
@@ -1365,6 +1377,262 @@ function SamiScreen() {
         Sami nunca emite juicios clínicos. En caso de crisis, activa el protocolo de soporte
         del centro de salud.
       </p>
+    </div>
+  );
+}
+
+/* ─────────────── Tienda ─────────────── */
+
+type StoreProduct = {
+  id: string;
+  category: string;
+  name: string;
+  desc: string;
+  points: number;
+  badge: string | null;
+  Icon: LucideIcon;
+  accent: string;
+  accentBg: string;
+  badgeClass: string;
+};
+
+const STORE_PRODUCTS: StoreProduct[] = [
+  {
+    id: "nejm",
+    category: "Revista",
+    name: "NEJM · Artículo",
+    desc: "Acceso a 1 artículo premium del New England Journal of Medicine.",
+    points: 50,
+    badge: "Popular",
+    Icon: BookOpen,
+    accent: "text-blue-400",
+    accentBg: "bg-blue-500/10 border-blue-400/20",
+    badgeClass: "bg-blue-500/20 text-blue-300",
+  },
+  {
+    id: "discount-15",
+    category: "Descuento",
+    name: "15% off Cursos",
+    desc: "Descuento en plataformas de formación y certificación médica.",
+    points: 100,
+    badge: "Limitado",
+    Icon: Tag,
+    accent: "text-amber-400",
+    accentBg: "bg-amber-500/10 border-amber-400/20",
+    badgeClass: "bg-amber-500/20 text-amber-300",
+  },
+  {
+    id: "lancet",
+    category: "Revista",
+    name: "The Lancet · 7 días",
+    desc: "Acceso digital completo a The Lancet y sus ediciones especiales.",
+    points: 120,
+    badge: null,
+    Icon: BookOpen,
+    accent: "text-red-400",
+    accentBg: "bg-red-500/10 border-red-400/20",
+    badgeClass: "",
+  },
+  {
+    id: "congress",
+    category: "Conferencia",
+    name: "Congreso Virtual",
+    desc: "Ponencias grabadas del último Congreso de Medicina Interna.",
+    points: 200,
+    badge: "Exclusivo",
+    Icon: Video,
+    accent: "text-emerald-400",
+    accentBg: "bg-emerald-500/10 border-emerald-400/20",
+    badgeClass: "bg-emerald-500/20 text-emerald-300",
+  },
+  {
+    id: "uptodate",
+    category: "Plataforma",
+    name: "UpToDate · 7 días",
+    desc: "Acceso ilimitado a UpToDate, la guía clínica #1 del mundo.",
+    points: 250,
+    badge: "Top",
+    Icon: Zap,
+    accent: "text-sky-400",
+    accentBg: "bg-sky-500/10 border-sky-400/20",
+    badgeClass: "bg-sky-500/20 text-sky-300",
+  },
+  {
+    id: "amboss",
+    category: "Plataforma",
+    name: "AMBOSS · 1 mes",
+    desc: "Suscripción mensual completa para residentes y médicos jóvenes.",
+    points: 350,
+    badge: null,
+    Icon: GraduationCap,
+    accent: "text-violet-400",
+    accentBg: "bg-violet-500/10 border-violet-400/20",
+    badgeClass: "",
+  },
+];
+
+function StoreScreen() {
+  const [balance, setBalance] = useState(getBalance);
+  const [redeemed, setRedeemed] = useState(getRedeemed);
+  const [confirming, setConfirming] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<{ name: string; code: string } | null>(null);
+
+  const handleRedeem = (product: StoreProduct) => {
+    if (balance < product.points) return;
+    if (confirming === product.id) {
+      const item = spendPoints(product.points, product.id, product.name);
+      if (item) {
+        setBalance(getBalance());
+        setRedeemed(getRedeemed());
+        setSuccessMsg({ name: item.productName, code: item.code });
+        setConfirming(null);
+      }
+    } else {
+      setConfirming(product.id);
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-6">
+      {/* Header con balance */}
+      <div className="flex items-center justify-between">
+        <p className="text-white font-semibold text-lg tracking-tight">Tienda Sami</p>
+        <div className="flex items-center gap-1.5 bg-amber-400/10 border border-amber-400/20 rounded-full px-3 py-1.5">
+          <Star size={13} className="text-amber-400 fill-amber-400" />
+          <span className="text-amber-300 font-bold text-sm tabular-nums">{balance}</span>
+          <span className="text-amber-400/60 text-xs font-medium">pts</span>
+        </div>
+      </div>
+
+      {/* Toast de canje exitoso */}
+      {successMsg && (
+        <div className="bg-emerald-500/10 border border-emerald-400/30 rounded-2xl px-4 py-3.5 flex items-start gap-3">
+          <Check size={16} className="text-emerald-400 shrink-0 mt-0.5" strokeWidth={3} />
+          <div className="flex flex-col gap-0.5 flex-1">
+            <p className="text-emerald-300 text-sm font-semibold">{successMsg.name} canjeado</p>
+            <p className="text-white/40 text-xs font-mono tracking-widest">{successMsg.code}</p>
+          </div>
+          <button
+            onClick={() => setSuccessMsg(null)}
+            className="text-white/30 hover:text-white/60 transition text-sm"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
+      {/* Cómo ganar puntos */}
+      <div className="bg-neutral-900 rounded-2xl px-4 py-3 flex items-center gap-3">
+        <div className="h-9 w-9 rounded-full bg-amber-500/10 border border-amber-400/20 flex items-center justify-center shrink-0">
+          <Star size={15} className="text-amber-400 fill-amber-400" />
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <p className="text-white text-xs font-semibold">¿Cómo ganar puntos?</p>
+          <p className="text-white/40 text-xs leading-snug">
+            Cada pregunta Likert en tu reloj ={" "}
+            <span className="text-amber-300 font-semibold">+10 pts</span>
+            {" · "}Quiz inicial ={" "}
+            <span className="text-amber-300 font-semibold">+50 pts</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Grid de productos */}
+      <div className="grid grid-cols-2 gap-3">
+        {STORE_PRODUCTS.map((product) => {
+          const canAfford = balance >= product.points;
+          const isConfirming = confirming === product.id;
+
+          return (
+            <div
+              key={product.id}
+              className={cn(
+                "relative flex flex-col gap-3 p-4 rounded-2xl border transition-all",
+                "bg-neutral-900 border-white/10",
+                !canAfford && "opacity-55",
+              )}
+            >
+              {product.badge && (
+                <span
+                  className={cn(
+                    "absolute top-3 right-3 text-[9px] font-bold px-2 py-0.5 rounded-full",
+                    product.badgeClass,
+                  )}
+                >
+                  {product.badge}
+                </span>
+              )}
+
+              <div
+                className={cn(
+                  "h-10 w-10 rounded-xl border flex items-center justify-center",
+                  product.accentBg,
+                )}
+              >
+                <product.Icon size={19} className={product.accent} />
+              </div>
+
+              <div className="flex flex-col gap-0.5">
+                <p className="text-[9px] font-semibold uppercase tracking-wider text-white/30">
+                  {product.category}
+                </p>
+                <p className="text-white text-[13px] font-semibold leading-snug">{product.name}</p>
+                <p className="text-white/40 text-[11px] leading-snug mt-0.5">{product.desc}</p>
+              </div>
+
+              <div className="flex items-center gap-1">
+                <Star size={11} className="text-amber-400 fill-amber-400" />
+                <span className="text-amber-300 text-xs font-bold tabular-nums">
+                  {product.points} pts
+                </span>
+              </div>
+
+              <button
+                onClick={() => handleRedeem(product)}
+                disabled={!canAfford}
+                className={cn(
+                  "w-full h-9 rounded-xl text-xs font-semibold transition active:scale-[0.97]",
+                  isConfirming
+                    ? "bg-emerald-500 hover:bg-emerald-400 text-black"
+                    : canAfford
+                      ? "bg-white/10 hover:bg-white/15 text-white"
+                      : "bg-white/5 text-white/20 cursor-not-allowed",
+                )}
+              >
+                {isConfirming ? "¿Confirmar?" : canAfford ? "Canjear" : "Sin puntos"}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Historial de canjes */}
+      {redeemed.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <p className="text-white/50 text-xs font-medium uppercase tracking-wider px-1">
+            Mis canjes
+          </p>
+          <div className="flex flex-col gap-2">
+            {redeemed.map((item) => (
+              <div
+                key={item.code}
+                className="flex items-center justify-between bg-neutral-900 rounded-2xl px-4 py-3.5"
+              >
+                <div className="flex flex-col gap-0.5">
+                  <p className="text-white text-sm font-medium">{item.productName}</p>
+                  <p className="text-white/30 text-[10px] font-mono tracking-widest">
+                    {item.code}
+                  </p>
+                </div>
+                <div className="flex items-center gap-1 shrink-0">
+                  <Star size={10} className="text-amber-400/50 fill-amber-400/50" />
+                  <span className="text-white/30 text-xs tabular-nums">{item.points}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

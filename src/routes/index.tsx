@@ -12,7 +12,9 @@ import {
   Sparkles,
   Waves,
   ChevronsUp,
+  Star,
 } from "lucide-react";
+import { addPoints } from "@/lib/points";
 import {
   sendFatigaData,
   sendMetricsData,
@@ -132,6 +134,7 @@ function WatchApp() {
     if (checkpoint) {
       void logLikertResponse(checkpoint.id, checkpoint.question, value, "watch");
     }
+    addPoints(10, "Respuesta Likert en reloj");
     if (activeCheckpoint === pendingCheckpoint) {
       setPendingCheckpoint(null);
     } else {
@@ -694,6 +697,10 @@ export function LikertPullView({
         </div>
         <p className="text-white text-xl font-medium tracking-tight">¡Gracias!</p>
         <p className="text-white/60 text-sm mt-1 leading-snug">Tu respuesta ha sido<br/>registrada.</p>
+        <div className="mt-3 flex items-center gap-1.5 bg-amber-400/10 border border-amber-400/20 rounded-full px-3 py-1">
+          <Star size={12} className="text-amber-400 fill-amber-400" />
+          <span className="text-amber-300 text-xs font-semibold">+10 pts ganados</span>
+        </div>
       </div>
     );
   }
